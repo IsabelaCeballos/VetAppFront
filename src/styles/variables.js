@@ -7,11 +7,6 @@ const COLORS = {
     rojo: "#E86166"
 }
   
-const TYPOGRAPIC = {
-    nunito: "Nunito, sans-serif"
-}
-  
 export default {
-    COLORS,
-    TYPOGRAPIC
+    COLORS
 };
