@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import './styles/globals.css'
+
 /** Páginas */
 import { Home } from './pages/Home'
 import { SearchUser } from './pages/SearchUser'
@@ -10,9 +10,8 @@ import { NewUser } from './pages/NewUser'
 import { NewPet } from './pages/NewPet'
 import { NewMedicines } from './pages/NewMedicines'
 
-
 /** Estilos globales */
-
+import './styles/globals.css'
 
 /** Contexto */ 
 export const App = () => {
