@@ -1,8 +1,16 @@
 import React from 'react';
 
+//components
+import { Header } from '../components/header';
+import { Footer } from '../components/footer';
+
 export const Home = () => {
 
     return (
-        <h1>Hola desde Home</h1>
-    )
+        <>
+            <Header />
+            <h1>Holiiiiii</h1>
+            <Footer />
+        </>
+    );
 }
