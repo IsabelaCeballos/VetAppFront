@@ -1,0 +1,45 @@
+.content_searchUser{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 7rem;
+}
+.content_imageOne{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content_imageOne img{
+    width: 20%;
+}
+.content_imageSecond{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+}
+.content_imageSecond img{
+    width: 20%;
+}
+.content_input{
+    width: 20%;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.15rem solid #F1517F;
+    border-radius: 0.6rem;
+    padding: 0.3rem;
+    box-shadow: 0px 13px 7px -8px rgba(0,0,0,0.14);
+}
+input{
+    border: none;
+    margin-left: 1rem;
+    width: 80%;
+    outline: none;
+    font-family: 'Nunito';
+}

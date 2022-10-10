@@ -1,8 +1,12 @@
 import React from 'react';
 import { Button } from '../components/button/Button';
 
-import user_dog  from "../assets/user_dog.png";
-import user_cat  from "../assets/user_cat.png";
+import user_dog from "../assets/user_dog.png";
+import user_cat from "../assets/user_cat.png";
+
+//components
+import { Header } from '../components/header';
+import { Footer } from '../components/footer';
 
 export const Home = () => {
 
@@ -25,28 +29,30 @@ export const Home = () => {
 
     return (
         <>
+            <Header />
             <section style={contentItems}>
                 <div style={todoItem}>
-                    <img style={imgPet}  src={user_dog} alt="pet" />
-                    <Button 
-                        fillColor="#F1517F" 
-                        borderColor="#F1517F"  
-                        width="15rem" 
+                    <img style={imgPet} src={user_dog} alt="pet" />
+                    <Button
+                        fillColor="#F1517F"
+                        borderColor="#F1517F"
+                        width="15rem"
                         goTo="/searchuser">
                         Buscar cliente
                     </Button>
                 </div>
                 <div style={todoItem}>
-                    <img style={imgPet}  src={user_cat} alt="pet" />
-                    <Button 
-                        fillColor="#6C70C9" 
-                        borderColor="#6C70C9"  
-                        width="15rem" 
+                    <img style={imgPet} src={user_cat} alt="pet" />
+                    <Button
+                        fillColor="#6C70C9"
+                        borderColor="#6C70C9"
+                        width="15rem"
                         goTo="/newuser">
                         Registrar nuevo cliente
                     </Button>
                 </div>
             </section>
+            <Footer />
         </>
-    )
+    );
 }
