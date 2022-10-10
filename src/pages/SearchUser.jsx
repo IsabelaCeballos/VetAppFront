@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 //components
 import { Header } from '../components/header';
@@ -7,24 +7,26 @@ import { ComponentSearchUser } from '../components/searchUser';
 import { InfoData } from '../components/infoData/InfoData';
 
 export const SearchUser = () => {
+    const [data, setData] = useState(null);
+
     const DATA_USER = {
-        _id:"633ce5f2e19ec40cd3707862",
+        _id: "633ce5f2e19ec40cd3707862",
         cc: "1001469387",
-        names:"Danielaa",
+        names: "Danielaa",
         surnames: "Jurado Blandón",
-        address:"120 East 68th",
-        phoneNumber:320742217,
-        __v:0
+        address: "120 East 68th",
+        phoneNumber: 320742217,
+        __v: 0
     };
-    
+
     return (
         <>
             <Header />
-            <ComponentSearchUser data={DATA_USER}/>
+            <ComponentSearchUser data={data} setData={setData} />
             {
-                DATA_USER ? 
-                <InfoData data={DATA_USER} title="Datos cliente" canEdit type="user" />
-                :null
+                data ?
+                    <InfoData data={data} title="Datos cliente" canEdit type="user" />
+                    : null
             }
             <Footer />
         </>

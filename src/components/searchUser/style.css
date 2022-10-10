@@ -26,8 +26,18 @@
 .content_imageSecond img{
     width: 20%;
 }
+.content_input_button{
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    width: 80%;
+}
+.content_button{
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+}
 .content_input{
-    width: 20%;
+    width: 30%;
     margin-top: 1rem;
     display: flex;
     align-items: center;
