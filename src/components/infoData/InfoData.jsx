@@ -5,6 +5,7 @@ import { Button } from '../button/Button';
 export const InfoData = (props) => {
     const {data, title, canEdit, type, action} = props;
     const [editData, setEditData] = useState(false);
+    const [submit, setSubmit] = useState("");
 
     const infoDataContainer = {
         width: "80%",
@@ -47,7 +48,7 @@ export const InfoData = (props) => {
         evt.preventDefault();
         const formData = new FormData(formRef.current);
         const values = Object.fromEntries(formData);
-        action(values);
+        action(values, submit);
     }
 
     return (
@@ -82,8 +83,8 @@ export const InfoData = (props) => {
                 :null
                 }
                 <div style={buttonsContainer}>
-                    <Button borderColor="#6C70C9" type="submit" >Guardar</Button>
-                    {canEdit && <Button borderColor="#E86166" >Eliminar</Button>}
+                    <Button borderColor="#6C70C9" typeButton="submit" funcionOnclick={()=>setSubmit("guardar")}>Guardar</Button>
+                    {canEdit && <Button borderColor="#E86166" typeButton="submit" funcionOnclick={()=>setSubmit("eliminar")}>Eliminar</Button>}
                 </div>
             </form>
         </section>

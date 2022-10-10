@@ -65,8 +65,8 @@ export const ComponentSearchUser = (props) => {
                         <input onChange={(event) => setInputData(event.target.value)}
                             type="text" placeholder='Identificación del cliente' />
                     </div>
-                    <div className='content_button' onClick={() => { getUser() }}>
-                        <Button borderColor="#F1517F" >Buscar</Button>
+                    <div className='content_button' >
+                        <Button borderColor="#F1517F" funcionOnclick={() => getUser()} >Buscar</Button>
                     </div>
                 </div>
                 {

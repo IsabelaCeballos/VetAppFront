@@ -4,16 +4,21 @@ import React from 'react';
 import { Button } from '../button/Button';
 
 export const NewData= (props) => {
-    const {idUser} = props;
+    const {typeTitle, id, goTo, children} = props;
     const newDataContainer = {
         width: "80%",
         margin: "0 auto 6rem",
     }
     return (
         <div style={newDataContainer}>
-            <h2 style={{color:"#6C70C9", margin:"1rem 0"}}>Sus mascotas</h2>
+            <h2 style={{color:"#6C70C9", margin:"1rem 0"}}>{typeTitle === "mascota" ? "Sus mascota": typeTitle === "medicamento" ? "Sus medicamenos" : ""}</h2>
+            <div style={{display: "flex", justifyContent: "space-around"}}>
+                {
+                    children
+                }
+            </div>
             <div style={{display: "flex", justifyContent: "center"}}>
-                <Button borderColor="#6C70C9" goTo={`newpet/${idUser}`}>Nueva mascota</Button>
+                <Button borderColor="#6C70C9" goTo={`${goTo}/${id}`}>Nueva mascota</Button>
             </div>  
         </div>
     )

@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 
 export const Button = (props) => {
-    const {fillColor, borderColor, width, goTo ,children } = props;
+    const {funcionOnclick, typeButton, fillColor, borderColor, width, goTo ,children } = props;
 
     const [isHovering, setIsHovering] = useState(false);
 
@@ -57,6 +57,8 @@ export const Button = (props) => {
                     </button>
                 </Link> :
                 <button 
+                    onClick={funcionOnclick}
+                    type={typeButton}
                     style={isHovering?buttonStyleHover:buttonStyle} 
                     onMouseEnter={handleMouseEnter} 
                     onMouseLeave={handleMouseLeave}>
