@@ -45,7 +45,7 @@ export const Button = (props) => {
     }
 
     return (
-        <Link to={goTo}>
+        <Link to={goTo ? goTo: "/"}>
             <button 
                 style={isHovering?buttonStyleHover:buttonStyle} 
                 onMouseEnter={handleMouseEnter} 

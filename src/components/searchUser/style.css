@@ -17,6 +17,7 @@
 }
 .content_imageSecond{
     width: 50%;
+    margin-bottom: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;

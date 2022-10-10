@@ -5,7 +5,8 @@ import imgUser from '../../assets/user_dog.png';
 import imgLupa from '../../assets/to_search.png';
 import imgLupaMini from '../../assets/lupa.svg'
 
-export const ComponentSearchUser = () => {
+export const ComponentSearchUser = (props) => {
+    const {data} = props;
     import('./style.css');
     return (
         <>
@@ -17,9 +18,13 @@ export const ComponentSearchUser = () => {
                     <img src={imgLupaMini} alt="img_lupa_mini" />
                     <input type="text" placeholder='Identificación del cliente' />
                 </div>
-                <div className='content_imageSecond'>
-                    <img src={imgLupa} alt="Lupa" />
-                </div>
+                {
+                    !data ?
+                        <div className='content_imageSecond'>
+                            <img src={imgLupa} alt="Lupa" />
+                        </div>
+                    :null
+                }
             </div>
         </>
     )
