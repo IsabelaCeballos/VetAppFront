@@ -45,13 +45,25 @@ export const Button = (props) => {
     }
 
     return (
-        <Link to={goTo ? goTo: "/"}>
-            <button 
-                style={isHovering?buttonStyleHover:buttonStyle} 
-                onMouseEnter={handleMouseEnter} 
-                onMouseLeave={handleMouseLeave}>
-                {children}
-            </button>
-        </Link>
+        <>
+            {
+                goTo ?
+                <Link to={goTo}>
+                    <button 
+                        style={isHovering?buttonStyleHover:buttonStyle} 
+                        onMouseEnter={handleMouseEnter} 
+                        onMouseLeave={handleMouseLeave}>
+                        {children}
+                    </button>
+                </Link> :
+                <button 
+                    style={isHovering?buttonStyleHover:buttonStyle} 
+                    onMouseEnter={handleMouseEnter} 
+                    onMouseLeave={handleMouseLeave}>
+                    {children}
+                </button>
+            }
+            
+        </>
     )
 }

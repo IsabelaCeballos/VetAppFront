@@ -24,8 +24,8 @@ export const App = () => {
                 <Route exact path="/viewpets" component={ViewPets} />
                 <Route exact path="/viewmedicine" component={ViewMedicine} />
                 <Route exact path="/newuser" component={NewUser} />
-                <Route exact path="/newpet" component={NewPet} />
-                <Route exact path="/newmedicine" component={NewMedicines} />
+                <Route exact path="/newpet/:idUser" component={NewPet} />
+                <Route exact path="/newmedicine/:idPet" component={NewMedicines} />
             </Switch>
         </BrowserRouter>
     )
