@@ -9,11 +9,14 @@ import imgLupaMini from '../../assets/lupa.svg';
 import { Button } from '../button/Button'
 
 export const ComponentSearchUser = (props) => {
-    const { data, setData } = props;
+    const { data, setData, setDataPet } = props;
     const [inputData, setInputData] = useState(null);
 
+    /*useEffect(() => {
+        getPets();
+    }, [data._id !== ""]);*/
+
     const getUser = async () => {
-        console.log('clic');
         try {
             const response = await fetch(`https://vet-hazel.vercel.app/api/users/${inputData}`, {
                 headers: {
@@ -24,11 +27,30 @@ export const ComponentSearchUser = (props) => {
             });
             const responseJson = await response.json();
             setData(responseJson);
-            console.log(responseJson)
+            getPets(responseJson);
         } catch (error) {
             console.error(error);
         }
     };
+
+    const getPets = async (responseJson) => {
+        try {
+            const responsePet = await fetch(`https://vet-hazel.vercel.app/api/petsUser/${responseJson._id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*"
+                },
+                method: 'GET'
+            });
+            console.log(responseJson._id)
+            const responsePetJson = await responsePet.json();
+            setDataPet(responsePetJson);
+            console.log(responsePetJson)
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     import('./style.css');
     console.log(inputData);
     return (
@@ -43,21 +65,21 @@ export const ComponentSearchUser = (props) => {
                         <input onChange={(event) => setInputData(event.target.value)}
                             type="text" placeholder='Identificación del cliente' />
                     </div>
-                    <div className='content_button' onClick={() => getUser()}>
+                    <div className='content_button' onClick={() => { getUser() }}>
                         <Button borderColor="#F1517F" >Buscar</Button>
                     </div>
                 </div>
                 {
-                    !data ?
-                        <div className='content_imageSecond'>
-                            <img src={imgLupa} alt="Lupa" />
+                    data === null ?
+                        <div className='content_p'>
+                            <p>¡No existe un cliente!</p>
                         </div>
                         : null
                 }
                 {
-                    data === null ?
-                        <div className='content_p'>
-                            <p>No existe un cliente</p>
+                    !data ?
+                        <div className='content_imageSecond'>
+                            <img src={imgLupa} alt="Lupa" />
                         </div>
                         : null
                 }

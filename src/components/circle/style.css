@@ -1,0 +1,19 @@
+.content_ppal{
+    width: 100%;
+}
+.content_circle{
+    width: 100px;
+    height: 100px;
+    border: 0.2rem solid #F1517F;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+img{
+    width: 1.5rem;
+}
+p{
+    font-weight: 600;
+}

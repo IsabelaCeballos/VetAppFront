@@ -17,7 +17,7 @@
 }
 .content_imageSecond{
     width: 50%;
-    margin-bottom: 4rem;
+    margin-bottom: 2.32rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,6 +46,13 @@
     border-radius: 0.6rem;
     padding: 0.3rem;
     box-shadow: 0px 13px 7px -8px rgba(0,0,0,0.14);
+}
+.content_p{
+    margin-top: 2rem;
+}
+.content_p p{
+    font-weight: 600;
+    font-size: 1.2rem;
 }
 input{
     border: none;
