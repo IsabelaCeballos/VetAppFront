@@ -6,6 +6,7 @@ import { Footer } from '../components/footer';
 import { ComponentSearchUser } from '../components/searchUser';
 import { InfoData } from '../components/infoData/InfoData';
 import { Circle } from '../components/circle';
+import { NewData } from '../components/infoData/NewData';
 
 export const SearchUser = () => {
     const [data, setData] = useState("");
@@ -60,15 +61,17 @@ export const SearchUser = () => {
                     <InfoData data={data} title="Datos cliente" canEdit type="user" action={saveOrRemove} />
                     : null
             }
-            {
-                dataPet ?
-                    dataPet.map((element, index) => {
-                        return (
-                            <Circle key={index} name={element.name} type={"pet"} />
-                        );
-                    })
-                    : null
-            }
+            <NewData typeTitle="mascota" goTo={`/newpet`} id={data._id}>
+                {
+                    dataPet ?
+                        dataPet.map((element, index) => {
+                            return (
+                                <Circle key={index} name={element.name} type={"pet"} dataPet={element} />
+                            );
+                        })
+                        : null
+                }
+            </NewData>
             <Footer />
         </>
     );
