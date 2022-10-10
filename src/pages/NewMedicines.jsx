@@ -5,6 +5,7 @@ import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import imgUser from '../assets/user_cat.png';
 import { InfoData } from '../components/infoData/InfoData';
+import { useParams } from 'react-router-dom';
 
 export const NewMedicines = () => {
     const content_imageOne = {
@@ -14,7 +15,8 @@ export const NewMedicines = () => {
         alignItems: "center",
         justifyContent: "center"
     }
-
+    const {idPet }= useParams();
+    console.log(idPet);
     return (
         <>
             <Header />

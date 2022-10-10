@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from '../button/Button';
 
 export const InfoData = (props) => {
-    const {data, title, canEdit, type} = props;
+    const {data, title, canEdit, type, action} = props;
     const [editData, setEditData] = useState(false);
 
     const infoDataContainer = {
@@ -42,19 +42,27 @@ export const InfoData = (props) => {
         opacity: editData || !canEdit ? "1": "0.5"
     }
 
+    const formRef = React.useRef();
+    const handleSubmit = (evt)=> {
+        evt.preventDefault();
+        const formData = new FormData(formRef.current);
+        const values = Object.fromEntries(formData);
+        action(values);
+    }
+
     return (
         <section style={infoDataContainer}>
             <div style={titleContent}>
                 <h2 style={{color:"#6C70C9"}}>{title}</h2>
                 {canEdit && <p style={canEditText} onClick={() => setEditData(true)}>Editar</p>}
             </div>
-            <form action="">
+            <form onSubmit={handleSubmit} ref={formRef}>
                 {
                 type === "user"?
                     <section>
                         <div style={fileContent}><p style={{fontWeight: "bolder"}}>Cedula:</p><input readOnly={data && !editData ?true:null} type="text" name="cc" id="cc" defaultValue={data ? data.cc:"*"} style={inputData}/></div>
                         <div style={fileContent}><p style={{fontWeight: "bolder"}}>Nombre/s:</p><input readOnly={data && !editData ?true:null} type="text" name="names" id="names" defaultValue={data ? data.names:"*"} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Aprellidos:</p><input readOnly={data && !editData ?true:null} type="text" name="surnames" id="surnames" defaultValue={data ? data.surnames:"*"} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Apellidos:</p><input readOnly={data && !editData ?true:null} type="text" name="surnames" id="surnames" defaultValue={data ? data.surnames:"*"} style={inputData}/></div>
                         <div style={fileContent}><p style={{fontWeight: "bolder"}}>Dirección:</p><input readOnly={data && !editData ?true:null} type="text" name="address" id="address" defaultValue={data ? data.address:"*"} style={inputData}/></div>
                         <div style={fileContent}><p style={{fontWeight: "bolder"}}>Teléfono:</p><input readOnly={data && !editData ?true:null} type="text" name="phoneNumber" id="phoneNumber" defaultValue={data ? data.phoneNumber:"*"} style={inputData}/></div>
                     </section>
@@ -74,7 +82,7 @@ export const InfoData = (props) => {
                 :null
                 }
                 <div style={buttonsContainer}>
-                    <Button borderColor="#6C70C9" >Guardar</Button>
+                    <Button borderColor="#6C70C9" type="submit" >Guardar</Button>
                     {canEdit && <Button borderColor="#E86166" >Eliminar</Button>}
                 </div>
             </form>
