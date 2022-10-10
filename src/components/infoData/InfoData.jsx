@@ -4,6 +4,7 @@ import { Button } from '../button/Button';
 
 export const InfoData = (props) => {
     const {data, title, canEdit, type, action} = props;
+
     const [editData, setEditData] = useState(false);
     const [submit, setSubmit] = useState("");
 
@@ -27,8 +28,8 @@ export const InfoData = (props) => {
         width: "10rem",
         fontSize: "1rem",
         textAlign: "end",
-        border: "none",
-        outline: "none"
+        borderBottom: "1px dashed gray",
+        outline: "none",
     }
     const canEditText = {
         textDecoration: "underline", 
@@ -61,24 +62,25 @@ export const InfoData = (props) => {
                 {
                 type === "user"?
                     <section>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Cedula:</p><input readOnly={data && !editData ?true:null} type="text" name="cc" id="cc" defaultValue={data ? data.cc:"*"} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Nombre/s:</p><input readOnly={data && !editData ?true:null} type="text" name="names" id="names" defaultValue={data ? data.names:"*"} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Apellidos:</p><input readOnly={data && !editData ?true:null} type="text" name="surnames" id="surnames" defaultValue={data ? data.surnames:"*"} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Dirección:</p><input readOnly={data && !editData ?true:null} type="text" name="address" id="address" defaultValue={data ? data.address:"*"} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Teléfono:</p><input readOnly={data && !editData ?true:null} type="text" name="phoneNumber" id="phoneNumber" defaultValue={data ? data.phoneNumber:"*"} style={inputData}/></div>
+                        {console.log(data)}
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Cedula:</p><input readOnly={data && !editData ?true:null} type="text" name="cc" id="cc" value={data && data.cc} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Nombre/s:</p><input readOnly={data && !editData ?true:null} type="text" name="names" id="names" value={data && data.names} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Apellidos:</p><input readOnly={data && !editData ?true:null} type="text" name="surnames" id="surnames" value={data && data.surnames} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Dirección:</p><input readOnly={data && !editData ?true:null} type="text" name="address" id="address" value={data && data.address} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Teléfono:</p><input readOnly={data && !editData ?true:null} type="text" name="phoneNumber" id="phoneNumber" value={data && data.phoneNumber} style={inputData}/></div>
                     </section>
                 : type === "pet" ?
                     <section>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Nombre:</p><input readOnly={data && !editData ?true:null} type="text" name="name" id="name" defaultValue={data ? data.name:"*"} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Raza:</p><input readOnly={data && !editData ?true:null} type="text" name="race" id="race" defaultValue={data ? data.race:"*"} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Edad:</p><input readOnly={data && !editData ?true:null} type="text" name="age" id="age" defaultValue={data ? data.age:"*"} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Peso:</p><input readOnly={data && !editData ?true:null} type="text" name="weight" id="weight" defaultValue={data ? data.weight:"*"} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Nombre:</p><input readOnly={data && !editData ?true:null} type="text" name="name" id="name" value={data && data.name} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Raza:</p><input readOnly={data && !editData ?true:null} type="text" name="race" id="race" value={data && data.race} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Edad:</p><input readOnly={data && !editData ?true:null} type="text" name="age" id="age" value={data && data.age} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Peso:</p><input readOnly={data && !editData ?true:null} type="text" name="weight" id="weight" value={data && data.weight} style={inputData}/></div>
                     </section>
                 : type === "medicine"?
                 <section>
-                    <div style={fileContent}><p style={{fontWeight: "bolder"}}>Nombre:</p><input readOnly={data && !editData ?true:null} type="text" name="nameMedicine" id="nameMedicine" defaultValue={data ? data.nameMedicine:"*"} style={inputData}/></div>
-                    <div style={fileContent}><p style={{fontWeight: "bolder"}}>Descipción:</p><input readOnly={data && !editData ?true:null} type="text" name="description" id="description" defaultValue={data ? data.description:"*"} style={inputData}/></div>
-                    <div style={fileContent}><p style={{fontWeight: "bolder"}}>Dosis:</p><input readOnly={data && !editData ?true:null} type="text" name="doses" id="doses" defaultValue={data ? data.doses:"*"} style={inputData}/></div>
+                    <div style={fileContent}><p style={{fontWeight: "bolder"}}>Nombre:</p><input readOnly={data && !editData ?true:null} type="text" name="nameMedicine" id="nameMedicine" value={data && data.nameMedicine} style={inputData}/></div>
+                    <div style={fileContent}><p style={{fontWeight: "bolder"}}>Descipción:</p><input readOnly={data && !editData ?true:null} type="text" name="description" id="description" value={data && data.description} style={inputData}/></div>
+                    <div style={fileContent}><p style={{fontWeight: "bolder"}}>Dosis:</p><input readOnly={data && !editData ?true:null} type="text" name="doses" id="doses" value={data && data.doses} style={inputData}/></div>
                 </section>
                 :null
                 }

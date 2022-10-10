@@ -18,7 +18,11 @@ export const NewData = (props) => {
                 }
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
-                <Button borderColor="#6C70C9" goTo={`${goTo}/${id}`}>Nueva mascota</Button>
+                <Button borderColor="#6C70C9" goTo={`${goTo}/${id}`}>{
+                    typeTitle === "mascota" ? "Nueva mascota"
+                        : typeTitle === "medicamento" ?
+                            "Nuevo medicamentos" : ""
+                }</Button>
             </div>
         </div>
     )
