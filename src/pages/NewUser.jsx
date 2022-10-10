@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 //components
 import { Header } from '../components/header';
@@ -17,17 +17,16 @@ export const NewUser = () => {
         alignItems: "center",
         justifyContent: "center"
     }
-    const newUser = async (dataUser) =>{
+    const newUser = async (dataUser) => {
         dataUser.phoneNumber = parseInt(dataUser.phoneNumber);
-
         try {
             const response = await fetch("https://vet-hazel.vercel.app/api/create_user", {
-            headers: {
-                'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "*"
-            },
-            method: 'POST',
-            body: JSON.stringify(dataUser)
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*"
+                },
+                method: 'POST',
+                body: JSON.stringify(dataUser)
             });
             const responseJson = await response.json();
             alert("usuario creado correctamente");
@@ -37,15 +36,15 @@ export const NewUser = () => {
             console.error(error);
         }
     };
-    
+
     return (
         <>
             <Header />
             <div style={content_imageOne}>
-                <img src={imgUser} alt="img_searchUser" style={{width: "10%"}}/>
+                <img src={imgUser} alt="img_searchUser" style={{ width: "10%" }} />
             </div>
             <InfoData title="Nuevo cliente" type="user" action={newUser} />
-             {response_id && <NewData idUser={response_id} /> }
+            {response_id && <NewData idUser={response_id} />}
             <Footer />
         </>
     )

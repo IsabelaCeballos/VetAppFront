@@ -13,8 +13,9 @@ export const ComponentSearchUser = (props) => {
     const [inputData, setInputData] = useState(null);
 
     const getUser = async () => {
+        console.log('clic');
         try {
-            const response = await fetch(`http://localhost:3000/api/users/${inputData}`, {
+            const response = await fetch(`https://vet-hazel.vercel.app/api/users/${inputData}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     "Access-Control-Allow-Origin": "*"
@@ -23,6 +24,7 @@ export const ComponentSearchUser = (props) => {
             });
             const responseJson = await response.json();
             setData(responseJson);
+            console.log(responseJson)
         } catch (error) {
             console.error(error);
         }
@@ -41,14 +43,21 @@ export const ComponentSearchUser = (props) => {
                         <input onChange={(event) => setInputData(event.target.value)}
                             type="text" placeholder='Identificación del cliente' />
                     </div>
-                    <div className='content_button'>
-                        <Button borderColor="#F1517F" type="submit" onClick={getUser}>Buscar</Button>
+                    <div className='content_button' onClick={() => getUser()}>
+                        <Button borderColor="#F1517F" >Buscar</Button>
                     </div>
                 </div>
                 {
                     !data ?
                         <div className='content_imageSecond'>
                             <img src={imgLupa} alt="Lupa" />
+                        </div>
+                        : null
+                }
+                {
+                    data === null ?
+                        <div className='content_p'>
+                            <p>No existe un cliente</p>
                         </div>
                         : null
                 }
