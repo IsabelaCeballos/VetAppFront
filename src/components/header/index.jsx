@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { jsPDF } from "jspdf";
 
@@ -6,6 +6,8 @@ import logoHeader from '../../assets/logo.svg';
 
 export const Header = () => {
     import('./style.css');
+    const [users, setUsers] = useState("");
+    const [medicines, setMedicines] = useState("");
 
     const getPdf = () => {
         console.log('holiii')
@@ -16,10 +18,19 @@ export const Header = () => {
 
         //instancia del objeto
         const doc = new jsPDF();
+        debugger
+        let i = 50;
+        users.map((element) => {
+            return (
+                doc.text(20, i, element.fullname)
+            );
+            i = (i + 10);
+        })
+
+        doc.text(20, 40, users.fullname);
 
 
         doc.setFontSize(22);
-        doc.text(20, 20, 'This is a title');
 
         doc.setFontSize(16);
         doc.text(20, 30, 'This is some normal sized text underneath.');
@@ -37,6 +48,7 @@ export const Header = () => {
                 method: 'GET'
             });
             const responseJson = await response.json();
+            setUsers(responseJson);
         } catch (error) {
             console.error(error);
         }
@@ -51,7 +63,8 @@ export const Header = () => {
                 },
                 method: 'GET'
             });
-            const responseJson = await response.json();
+            const responseMJson = await response.json();
+            setMedicines(responseMJson);
         } catch (error) {
             console.error(error);
         }
