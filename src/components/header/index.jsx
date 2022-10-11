@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { jsPDF } from "jspdf";
 
 import logoHeader from '../../assets/logo.svg';
+import logoMorado from '../../assets/logoMora.jpg';
+import huellaRosa from '../../assets/huellarosa.jpg';
+
 
 export const Header = () => {
     import('./style.css');
@@ -32,16 +35,64 @@ export const Header = () => {
 
             //instancia del objeto
             const doc = new jsPDF();
-            debugger
-            let i = 50;
+            //debugger
+            let i = 35;
 
-            DATA_FULL.map((element) => {
-                return (
-                    doc.text(20, i, element)
-                );
-                i = (i + 10);
+            doc.addImage(logoMorado, 'JPG', 50, 8, 8, 8);
+            doc.setTextColor(108, 112, 201);
+            doc.setFontSize(17);
+            doc.setFont("Helvetica");
+            doc.text(60, 15, 'Reporte sobre clientes y medicinas');
+
+            DATA_FULL[0].map((element) => {
+                if (i > 280) {
+                    doc.addPage()
+                    i = 35;
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(13);
+                    doc.setFont("Helvetica");
+                    doc.text(35, i, `${element.full_name}`)
+                    doc.text(110, i, ` ${element.cedula}`)
+                } else {
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(13);
+                    doc.setFont("Helvetica");
+                    doc.text(35, i, `${element.full_name}`)
+                    doc.text(110, i, ` ${element.cedula}`)
+                }
+                i = i + 10;
             })
-            doc.setFontSize(22);
+            let j = i + 15
+            let k = j - 8;
+
+            //doc.addFont('ArialMS', 'Arial', 'normal');
+            doc.setFont("Helvetica");
+            doc.addImage(huellaRosa, 'JPG', 70, k, 8, 8);
+            doc.setTextColor(254, 137, 156);
+            doc.setFontSize(17);
+
+            doc.text(80, j, 'Medicinas');
+            i = i + 30;
+
+            DATA_FULL[1].map((element) => {
+                if (i > 280) {
+                    doc.addPage()
+                    i = 35;
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(11);
+                    doc.setFont("Helvetica");
+                    doc.text(35, i, element);
+                } else {
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(11);
+                    doc.setFont("Helvetica");
+                    doc.text(35, i, element);
+                }
+                i = i + 10;
+            })
+
+            //doc.setTextColor(0, 0, 0);
+            doc.setFontSize(15);
             doc.save('Reporte.pdf');
         }
 

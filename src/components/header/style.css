@@ -26,3 +26,7 @@ a{
 .ImgLogo{
     width: 3rem;
 }
+p{
+    font-weight: 600;
+    cursor: pointer;
+}
