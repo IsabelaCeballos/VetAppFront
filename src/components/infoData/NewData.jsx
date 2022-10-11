@@ -11,7 +11,7 @@ export const NewData = (props) => {
     }
     return (
         <div style={newDataContainer}>
-            <h2 style={{ color: "#6C70C9", margin: "1rem 0" }}>{typeTitle === "mascota" ? "Sus mascotas" : typeTitle === "medicamento" ? "Sus medicamentos" : ""}</h2>
+            <h2 style={{ color: "#6C70C9", margin: "1rem 0" }}>{typeTitle === "mascota" ? "Sus mascotas" : typeTitle === "medicina" ? "Sus medicamentos" : ""}</h2>
             <div style={{ display: "flex", justifyContent: "space-around", marginBottom: "2rem" }}>
                 {
                     children
@@ -19,9 +19,11 @@ export const NewData = (props) => {
             </div>
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button borderColor="#6C70C9" goTo={`${goTo}/${id}`}>{
-                    typeTitle === "mascota" ? "Nueva mascota"
-                        : typeTitle === "medicamento" ?
-                            "Nuevo medicamentos" : ""
+                    typeTitle === "mascota" 
+                    ? "Nueva mascota"
+                    : typeTitle === "medicina" 
+                    ? "Nueva medicina" 
+                    : ""
                 }</Button>
             </div>
         </div>

@@ -51,7 +51,7 @@ export const NewPet = () => {
                 <img src={imgUser} alt="img_searchUser" style={{ width: "10%" }} />
             </div>
             <InfoData title="Nueva mascota" type="pet" action={newPet} />
-            {response_id && <NewData typeTitle="medicamento" id={response_id} goTo="/newmedicine" />}
+            {response_id && <NewData typeTitle="medicina" id={response_id} goTo="/newmedicine" />}
             <Footer />
         </>
     )

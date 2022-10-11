@@ -29,18 +29,57 @@ export const ViewPets = () => {
             });
             const responsePetJson = await responsePet.json();
             setPet(responsePetJson);
-            //getMedicine(responsePetJson);
+            getMedicine(responsePetJson);
             console.log(responsePetJson)
         } catch (error) {
             console.error(error);
         }
     }
 
-    const getMedicine = async (responsePetJson) => {
-        debugger
-        const r = responsePetJson;
+    const saveOrRemove = async (dataPet, typeSubmit) => {
+        if (typeSubmit === "guardar") {
+            console.log("hay que guardar");
+            dataPet.age = parseInt(dataPet.age);
+            dataPet.weight = parseInt(dataPet.weight);
+            console.log(dataPet);
+
+            try {
+                const response = await fetch(`https://vet-hazel.vercel.app/api/update_pet/${idPet}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "Access-Control-Allow-Origin": "*"
+                    },
+                    method: 'PUT',
+                    body: JSON.stringify(dataPet)
+                });
+                const responseJson = await response.json();
+                alert("Mascota actualizada correctamente");
+                console.log(responseJson);
+            } catch (error) {
+                console.error(error);
+            }
+        } else if (typeSubmit === "eliminar") {
+            console.log("hay que eliminar");
+            console.log(dataPet);
+            try {
+                const response = await fetch(`https://vet-hazel.vercel.app/api/delete_pet/${idPet}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        "Access-Control-Allow-Origin": "*"
+                    },
+                    method: 'DELETE'
+                });
+                const responseJson = await response.json();
+                alert("Mascota eliminada correctamente");
+                console.log(responseJson);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+    const getMedicine = async () => {
         try {
-            const responseMedicine = await fetch(`https://vet-hazel.vercel.app/api/medicines/${r._id}`, {
+            const responseMedicine = await fetch(`https://vet-hazel.vercel.app/api/medicinesPet/${idPet}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     "Access-Control-Allow-Origin": "*"
@@ -49,7 +88,6 @@ export const ViewPets = () => {
             });
             const responseMedicineJson = await responseMedicine.json();
             setMedicine(responseMedicineJson);
-            console.log("holiii" + responseMedicineJson);
         } catch (error) {
             console.error(error);
         }
@@ -70,13 +108,13 @@ export const ViewPets = () => {
             <div style={content_imageOne}>
                 <img src={imgUser} alt="img_searchUser" style={{ width: "10%" }} />
             </div>
-            <InfoData data={pet} title="Datos mascota" canEdit type="pet" />
-            <NewData typeTitle="medicina" goTo={`/newmedicine`} id={pet._id}>
+            <InfoData data={pet}setData={setPet}  title="Datos mascota" canEdit type="pet" action={saveOrRemove} />
+            <NewData typeTitle="medicina" goTo="/newmedicine" id={idPet}>
                 {
                     medicine ?
                         medicine.map((element, index) => {
                             return (
-                                <Circle key={index} name={element.name} dataMedicine={element} />
+                                <Circle key={index} name={element.nameMedicine} dataMedicine={element} />
                             );
                         })
                         : null

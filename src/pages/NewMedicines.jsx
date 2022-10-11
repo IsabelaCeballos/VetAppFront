@@ -45,7 +45,7 @@ export const NewMedicines = () => {
             <div style={content_imageOne}>
                 <img src={imgUser} alt="img_searchUser" style={{width: "10%"}}/>
             </div>
-            <InfoData itle="Nueva medicina" type="medicine" action={newMedicine} />
+            <InfoData title="Nueva medicina" type="medicine" action={newMedicine} />
             <Footer />
         </>
     )
