@@ -9,7 +9,7 @@ import imgLupaMini from '../../assets/lupa.svg';
 import { Button } from '../button/Button'
 
 export const ComponentSearchUser = (props) => {
-    const { data, setData, setDataPet } = props;
+    const { data, setData, setDataPet} = props;
     const [inputData, setInputData] = useState(null);
 
     /*useEffect(() => {
@@ -52,7 +52,7 @@ export const ComponentSearchUser = (props) => {
     };
 
     import('./style.css');
-    console.log(inputData);
+    // console.log(inputData);
     return (
         <>
             <div className='content_searchUser'>

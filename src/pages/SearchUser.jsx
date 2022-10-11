@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 //components
 import { Header } from '../components/header';
@@ -11,6 +11,7 @@ import { NewData } from '../components/infoData/NewData';
 export const SearchUser = () => {
     const [data, setData] = useState("");
     const [dataPet, setDataPet] = useState("");
+
     const saveOrRemove = async (dataUser, typeSubmit) => {
         if (typeSubmit === "guardar") {
             console.log("hay que guardar");
@@ -58,20 +59,22 @@ export const SearchUser = () => {
             <ComponentSearchUser data={data} setData={setData} setDataPet={setDataPet} />
             {
                 data ?
-                    <InfoData data={data} title="Datos cliente" canEdit type="user" action={saveOrRemove} />
-                    : null
+                    <>  
+                        <InfoData data={data} setData={setData} title="Datos cliente" canEdit type="user" action={saveOrRemove} />
+                        <NewData typeTitle="mascota" goTo={`/newpet`} id={data._id}>
+                            {
+                                dataPet ?
+                                    dataPet.map((element, index) => {
+                                        return (
+                                            <Circle key={index} name={element.name} type={"pet"} dataPet={element} />
+                                        );
+                                    })
+                                : null
+                            }
+                        </NewData>
+                    </>
+                :null
             }
-            <NewData typeTitle="mascota" goTo={`/newpet`} id={data._id}>
-                {
-                    dataPet ?
-                        dataPet.map((element, index) => {
-                            return (
-                                <Circle key={index} name={element.name} type={"pet"} dataPet={element} />
-                            );
-                        })
-                        : null
-                }
-            </NewData>
             <Footer />
         </>
     );

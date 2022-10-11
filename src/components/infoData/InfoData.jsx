@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from '../button/Button';
 
 export const InfoData = (props) => {
-    const {data, title, canEdit, type, action} = props;
+    const {data, setData, title, canEdit, type, action} = props;
 
     const [editData, setEditData] = useState(false);
     const [submit, setSubmit] = useState("");
@@ -47,11 +47,22 @@ export const InfoData = (props) => {
     const formRef = React.useRef();
     const handleSubmit = (evt)=> {
         evt.preventDefault();
-        // const formData = formRef.current.elements.input;
         const formData = new FormData(formRef.current);
         const values = Object.fromEntries(formData);
-        console.log(values);
-        // action(values, submit);
+        let valuesFull = {}
+        // console.log(values);
+        if (canEdit) {
+            const id = {_id: data._id};
+            setData({...values, id});
+            setEditData(!editData);
+            valuesFull = {...values, id};
+            console.log(valuesFull);
+            action(valuesFull, submit);
+        }else{
+            console.log(values);
+            action(values, submit)
+        }
+
     }
 
     return (
@@ -62,27 +73,129 @@ export const InfoData = (props) => {
             </div>
             <form onSubmit={handleSubmit} ref={formRef}>
                 {
-                type === "user"?
+                type === "user" ?
                     <section>
-                        {console.log(data)}
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Cedula:</p><input readOnly={!editData} type="text" name="cc" id="cc" defaultValue={data && data.cc} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Nombre/s:</p><input readOnly={!editData} type="text" name="names" id="names" defaulValue={data && data.names} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Apellidos:</p><input readOnly={!editData} type="text" name="surnames" id="surnames" defaulValue={data && data.surnames} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Dirección:</p><input readOnly={!editData} type="text" name="address" id="address" defaulValue={data && data.address} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Teléfono:</p><input readOnly={!editData} type="number" name="phoneNumber" id="phoneNumber" defaulValue={data && data.phoneNumber} style={inputData}/></div>
+                        {/* {console.log(data)} */}
+                        <div style={fileContent}>
+                            <p style={{fontWeight: "bolder"}}>Cedula:</p>
+                            {
+                                data && !editData 
+                                ?<input readOnly={data && !editData ?true:null} type="text" name="cc" id="cc" value={data && data.cc} style={inputData}/>
+                                :<input readOnly={data && !editData ?true:null} type="text" name="cc" id="cc" defaultValue={data && data.cc} style={inputData}/>
+                            }
+                            {/* <input readOnly={data && !editData ?true:null} type="text" name="cc" id="cc" value={data && data.cc} defaultValue={data && data.cc} style={inputData}/> */}
+                        </div>
+                        <div style={fileContent}>
+                            <p style={{fontWeight: "bolder"}}>Nombre/s:</p>
+                            {
+                                data && !editData 
+                                ?<input readOnly={data && !editData ?true:null} type="text" name="names" id="names" value={data && data.names} style={inputData}/>
+                                :<input readOnly={data && !editData ?true:null} type="text" name="names" id="names" defaultValue={data && data.names} style={inputData}/>
+                            }
+                            {/* <input readOnly={data && !editData ?true:null} type="text" name="names" id="names" defaultValue={data && data.names} style={inputData}/> */}
+                        </div>
+                        <div style={fileContent}>
+                            <p style={{fontWeight: "bolder"}}>Apellidos:</p>
+                            {
+                                data && !editData 
+                                ?<input readOnly={data && !editData ?true:null} type="text" name="surnames" id="surnames" value={data && data.surnames} style={inputData}/>
+                                :<input readOnly={data && !editData ?true:null} type="text" name="surnames" id="surnames" defaultValue={data && data.surnames} style={inputData}/>
+                            }
+                            {/* <input readOnly={data && !editData ?true:null} type="text" name="surnames" id="surnames" defaultValue={data && data.surnames} style={inputData}/> */}
+                        </div>
+                        <div style={fileContent}>
+                            <p style={{fontWeight: "bolder"}}>Dirección:</p>
+                            {
+                                data && !editData 
+                                ?<input readOnly={data && !editData ?true:null} type="text" name="address" id="address" value={data && data.address} style={inputData}/>
+                                :<input readOnly={data && !editData ?true:null} type="text" name="address" id="address" defaultValue={data && data.address} style={inputData}/>
+                            }
+                            {/* <input readOnly={data && !editData ?true:null} type="text" name="address" id="address" defaultValue={data && data.address} style={inputData}/> */}
+                        </div>
+                        <div style={fileContent}>
+                            <p style={{fontWeight: "bolder"}}>Teléfono:</p>
+                            {
+                                data && !editData 
+                                ?<input readOnly={data && !editData ?true:null} type="number" name="phoneNumber" id="phoneNumber" value={data && data.phoneNumber} style={inputData}/>
+                                :<input readOnly={data && !editData ?true:null} type="number" name="phoneNumber" id="phoneNumber" defaultValue={data && data.phoneNumber} style={inputData}/>
+                            }
+                            {/* <input readOnly={data && !editData ?true:null} type="number" name="phoneNumber" id="phoneNumber" defaultValue={data && data.phoneNumber} style={inputData}/> */}
+                        </div>
+                    
+                        
+                        {/* <div style={fileContent}><p style={{fontWeight: "bolder"}}>Nombre/s:</p><input readOnly={data && !editData ?true:null} type="text" name="names" id="names" defaultValue={data && data.names} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Apellidos:</p><input readOnly={data && !editData ?true:null} type="text" name="surnames" id="surnames" defaultValue={data && data.surnames} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Dirección:</p><input readOnly={data && !editData ?true:null} type="text" name="address" id="address" defaultValue={data && data.address} style={inputData}/></div>
+                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Teléfono:</p><input readOnly={data && !editData ?true:null} type="number" name="phoneNumber" id="phoneNumber" defaultValue={data && data.phoneNumber} style={inputData}/></div> */}
                     </section>
                 : type === "pet" ?
                     <section>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Nombre:</p><input readOnly={!editData} type="text" name="name" id="name" defaulValue={data && data.name} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Raza:</p><input readOnly={!editData} type="text" name="race" id="race" defaulValue={data && data.race} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Edad:</p><input readOnly={!editData} type="number" name="age" id="age" defaulValue={data && data.age} style={inputData}/></div>
-                        <div style={fileContent}><p style={{fontWeight: "bolder"}}>Peso:</p><input readOnly={!editData} type="number" name="weight" id="weight" defaulValue={data && data.weight} style={inputData}/></div>
+                        <div style={fileContent}>
+                            <p style={{fontWeight: "bolder"}}>Nombre:</p>
+                            {
+                                data && !editData 
+                                ?<input readOnly={data && !editData ?true:null} type="text" name="name" id="name" value={data && data.name} style={inputData}/>
+                                :<input readOnly={data && !editData ?true:null} type="text" name="name" id="name" defaultValue={data && data.name} style={inputData}/>
+                            }
+                            {/* <input readOnly={data && !editData ?true:null} type="text" name="name" id="name" defaultValue={data && data.name} style={inputData}/> */}
+                        </div>
+                        <div style={fileContent}>
+                            <p style={{fontWeight: "bolder"}}>Raza:</p>
+                            {
+                                data && !editData 
+                                ?<input readOnly={data && !editData ?true:null} type="text" name="race" id="race" value={data && data.race} style={inputData}/>
+                                :<input readOnly={data && !editData ?true:null} type="text" name="race" id="race" defaultValue={data && data.race} style={inputData}/>
+                            }
+                            {/* <input readOnly={data && !editData ?true:null} type="text" name="race" id="race" defaultValue={data && data.race} style={inputData}/> */}
+                        </div>
+                        <div style={fileContent}>
+                            <p style={{fontWeight: "bolder"}}>Edad:</p>
+                            {
+                                data && !editData 
+                                ?<input readOnly={data && !editData ?true:null} type="number" name="age" id="age" value={data && data.age} style={inputData}/>
+                                :<input readOnly={data && !editData ?true:null} type="number" name="age" id="age" defaultValue={data && data.age} style={inputData}/>
+                            }
+                            {/* <input readOnly={data && !editData ?true:null} type="number" name="age" id="age" defaultValue={data && data.age} style={inputData}/> */}
+                        </div>
+                        <div style={fileContent}>
+                            <p style={{fontWeight: "bolder"}}>Peso:</p>
+                            {
+                                data && !editData 
+                                ?<input readOnly={data && !editData ?true:null} type="number" name="weight" id="weight" value={data && data.weight} style={inputData}/>
+                                :<input readOnly={data && !editData ?true:null} type="number" name="weight" id="weight" defaultValue={data && data.weight} style={inputData}/>
+                            }
+                            {/* <input readOnly={data && !editData ?true:null} type="number" name="weight" id="weight" defaultValue={data && data.weight} style={inputData}/> */}
+                        </div>
                     </section>
                 : type === "medicine"?
                 <section>
-                    <div style={fileContent}><p style={{fontWeight: "bolder"}}>Nombre:</p><input readOnly={!editData} type="text" name="nameMedicine" id="nameMedicine" defaulValue={data && data.nameMedicine} style={inputData}/></div>
-                    <div style={fileContent}><p style={{fontWeight: "bolder"}}>Descipción:</p><input readOnly={!editData} type="text" name="description" id="description" defaulValue={data && data.description} style={inputData}/></div>
-                    <div style={fileContent}><p style={{fontWeight: "bolder"}}>Dosis:</p><input readOnly={!editData} type="number" name="doses" id="doses" defaulValue={data && data.doses} style={inputData}/></div>
+                    <div style={fileContent}>
+                        <p style={{fontWeight: "bolder"}}>Nombre:</p>
+                        {
+                            data && !editData 
+                            ?<input readOnly={data && !editData ?true:null} type="text" name="nameMedicine" id="nameMedicine" value={data && data.nameMedicine} style={inputData}/>
+                            :<input readOnly={data && !editData ?true:null} type="text" name="nameMedicine" id="nameMedicine" defaultValue={data && data.nameMedicine} style={inputData}/>
+                        }
+                        {/* <input readOnly={data && !editData ?true:null} type="text" name="nameMedicine" id="nameMedicine" defaultValue={data && data.nameMedicine} style={inputData}/> */}
+                    </div>
+                    <div style={fileContent}>
+                        <p style={{fontWeight: "bolder"}}>Descipción:</p>
+                        {
+                            data && !editData 
+                            ?<input readOnly={data && !editData ?true:null} type="text" name="description" id="description" value={data && data.description} style={inputData}/>
+                            :<input readOnly={data && !editData ?true:null} type="text" name="description" id="description" defaultValue={data && data.description} style={inputData}/>
+                        }
+                        {/* <input readOnly={data && !editData ?true:null} type="text" name="description" id="description" defaultValue={data && data.description} style={inputData}/> */}
+                    </div>
+                    <div style={fileContent}>
+                        <p style={{fontWeight: "bolder"}}>Dosis:</p>
+                        {
+                            data && !editData 
+                            ?<input readOnly={data && !editData ?true:null} type="number" name="doses" id="doses" value={data && data.doses} style={inputData}/>
+                            :<input readOnly={data && !editData ?true:null} type="number" name="doses" id="doses" defaultValue={data && data.doses} style={inputData}/>
+                        }
+                        {/* <input readOnly={data && !editData ?true:null} type="number" name="doses" id="doses" defaultValue={data && data.doses} style={inputData}/> */}
+                    </div>
                 </section>
                 :null
                 }
