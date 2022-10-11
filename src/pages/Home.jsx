@@ -8,6 +8,7 @@ import user_cat from "../assets/user_cat.png";
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 
+
 export const Home = () => {
 
     const todoItem = {
